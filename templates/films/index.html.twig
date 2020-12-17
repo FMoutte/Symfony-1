@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FilmsController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ url('films_create') }}">Nouveau Film</a>
+
+<div>
+    {% for film in films %}
+        <h2>#{{ film.id }} : {{ film.titre }}</h2>
+        <h3>Sortie : {{ film.anneeSortie }}</h3>
+        <p>{{film.resume}}</p> 
+        <hr />
+    {% endfor %}   
+</div>
+
+{% endblock %}
