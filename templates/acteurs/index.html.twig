@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des acteur {% endblock %}
+
+{% block body %}
+
+<a href="{{ url('acteurs_create') }}">Nouveau Acteur</a>
+
+<div>
+    {% for acteur in acteurs %}
+    
+    
+        <h2>#{{ acteur.id }} : {{ acteur.nom }}</h2>
+        <ul>
+        <li> <p>#{{ acteur.id }} : {{ acteur.Prenom }}</p></li>
+      </ul> 
+        <a href="{{ url('acteurs_edit', {'id': acteur.id}) }}">Editer</a>
+        <br/>
+        {% if acteur.id|length == 0 %}
+        <a href="{{ url('acteurs_delete', {'id': acteur.id}) }}">Supprimer</a>
+        <hr />
+         {% endif %}
+    {% endfor %}  
+    
+</div>
+
+{% endblock %}
+

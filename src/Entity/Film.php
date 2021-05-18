@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +20,7 @@ class Film
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255  )
      */
     private $titre;
 
@@ -32,6 +34,22 @@ class Film
      */
     private $annee_sortie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="films")
+     */
+    private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="films")
+     */
+    private $acteurs;
+
+    public function __construct()
+    {
+        $this->acteurs = new ArrayCollection();
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,7 +59,7 @@ class Film
     {
         return $this->titre;
     }
-
+   
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
@@ -72,4 +90,45 @@ class Film
 
         return $this;
     }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Acteur[]
+     */
+    
+
+    public function addActeur(Acteur $acteur): self
+    {
+        if (!$this->acteurs->contains($acteur)) {
+            $this->acteurs[] = $acteur;
+        }
+
+        return $this;
+    }
+
+    public function removeActeur(Acteur $acteur): self
+    {
+        $this->acteurs->removeElement($acteur);
+
+        return $this;
+    }
+
+    public function getActeurs(): Collection
+    {
+        return $this->acteurs;
+    }
+
+    
+    
 }

@@ -1,0 +1,47 @@
+
+
+<form method="POST">
+
+    <p>
+        <label for="nom">
+            Nom
+        </label>
+        <input type="text" name="nom" id="nom" />
+    </p>
+    <p>
+        <label for="prenom">
+            Prénom
+        </label>
+        <input type="text" name="prenom" id="prenom" />
+    </p>
+    <p>
+        <label for="date_naissance">
+           date de naissance
+        </label>
+        <input type="Date"  name="date_naissance" id="date_naissance"></input>
+    </p>
+    
+    <p>
+        <label for="date_mort">
+           date de mort
+        </label>
+        <input type="Date"  name="date_mort" id="date_mort"></input>
+    </p>
+ 
+ <p>
+        <label for="film">
+           Film
+        </label>
+        <select  name="film[]" id="film" multiple>
+        {% for film in films %}
+                <option value="{{ film.id}}">{{ film.titre}}</option>
+        {% endfor %}
+        </select>
+    </p>
+    
+    <p>
+        <button type="submit">
+            Enregistrer
+        </buttom>
+    </p>
+</form>

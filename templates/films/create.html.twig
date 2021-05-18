@@ -1,3 +1,5 @@
+
+
 <form method="POST">
 
     <p>
@@ -18,10 +20,31 @@
         </label>
         <input type="number" min="1900" max="2021" Step="1" name="annee_sortie" id="annee_sortie"></input>
     </p>
+
+<p>
+        <label for="acteur">
+           acteur
+        </label>
+        <select  name="acteur"  id="acteur" multiple>
+        {% for acteur in acteurs %}
+                <option value="{{ acteur.id}}">{{ acteur.nom}}</option>
+        {% endfor %}
+        </select>
+    </p>
+
+
     <p>
-        <label for="image_film">
-        <input type="file" name="imageFilm" id="imageFilm">
-    <p>
+        <label for="genre">
+           Genre
+        </label>
+        <select  name="genre"  id="genre" >
+        {% for genre in genres %}
+         <option value="{{ genre.id}}">{{ genre.nom}}</option>
+        {% endfor %}
+        </select>
+    </p>
+    
+
         <button type="submit">
             Enregistrer
         </buttom>

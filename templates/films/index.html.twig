@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FilmsController!{% endblock %}
+{% block title %}Liste des {% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,30 @@
     {% for film in films %}
         <h2>#{{ film.id }} : {{ film.titre }}</h2>
         <h3>Sortie : {{ film.anneeSortie }}</h3>
-        <p>{{film.resume}}</p> 
+
+        <ul>
+        {% for acteur in film.acteurs %}
+        <li>{{acteur.nom}} {{acteur.prenom}}</li>
+        {% endfor %}  
+        </ul>
+
+        
+        <a href="{{ url('films_edit', { 'id':film.id } ) }}">Editer</a>
+        <br/>
+
+        {% if film.genre|length == 0 %}
+        
+        <a href="{{ url('films_delete', { 'id':film.id } ) }}">Supprimer</a>
+        {% endif %}
+        
+        {% if film.genre is not null %}
+        <h3>Genre : {{ film.genre.nom }}</h3>
+        {% endif %}
+        
+        <p>{{film.resume}}</p>
+
+
+
         <hr />
     {% endfor %}   
 </div>
